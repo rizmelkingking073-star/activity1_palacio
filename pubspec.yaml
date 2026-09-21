@@ -12,6 +12,8 @@ dependencies:
   provider: ^6.1.2
   cupertino_icons: ^1.0.8
   connectivity_plus: ^6.1.0
+  # Used by the network diagnostic tool for the ping, download and upload tests.
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:

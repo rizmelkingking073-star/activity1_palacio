@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../widgets/activity_card.dart';
+import '../widgets/connection_health_banner.dart';
 import '../widgets/section_header.dart';
 import '../widgets/bottom_nav.dart';
 import 'activity_one_screen.dart';
 import 'activity_two_screen.dart';
 import 'network_monitor_screen.dart';
+import 'network_diagnostic_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -42,6 +44,18 @@ class HomeScreen extends StatelessWidget {
                     'Welcome to your laboratory workspace',
                     style: theme.textTheme.bodyMedium,
                   ),
+                  const SizedBox(height: AppSpacing.md),
+
+                  // Global connection health, broadcast from the diagnostic
+                  // tool. Tapping it opens the full dashboard.
+                  ConnectionHealthBanner(
+                    compact: true,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const NetworkDiagnosticScreen(),
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: AppSpacing.xl),
 
                   // Laboratory Activities section
@@ -75,6 +89,18 @@ class HomeScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (_) => const NetworkMonitorScreen()),
                     ),
                   ),
+                  ActivityCard(
+                    activityLabel: 'ACTIVITY 4',
+                    title: 'Network Diagnostic',
+                    description:
+                        'Speed and ping tests that adapt the interface to connection health',
+                    icon: Icons.speed_rounded,
+                    onOpen: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const NetworkDiagnosticScreen(),
+                      ),
+                    ),
+                  ),
 
                   const SizedBox(height: AppSpacing.sm),
 
@@ -99,7 +125,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: AppSpacing.xs),
                           Text(
-                            '3 Activities Available',
+                            '4 Activities Available',
                             style: theme.textTheme.bodyMedium?.copyWith(
                               color: AppColors.secondaryGreen,
                               fontWeight: FontWeight.w600,
