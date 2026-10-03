@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
@@ -11,29 +10,20 @@ import 'package:http/http.dart' as http;
 
 /// Connection health buckets the whole app reacts to.
 ///
-/// * [excellent] — more than 10 Mbps down, healthy latency.
-/// * [fair]      — 2–10 Mbps. Usable, but multimedia should be scaled down.
-/// * [poor]      — under 2 Mbps. Serve lightweight placeholders only.
-/// * [degraded]  — heavy packet loss or extreme latency. The link may report a
-///                 decent raw speed yet still be unusable, so this tier wins
-///                 over the bandwidth buckets.
-/// * [unknown]   — no diagnostic has completed yet.
+/// * [excellent]
+/// * [fair]
+/// * [poor]
+/// * [degraded]
+/// * [unknown]  .
 enum ConnectionTier { unknown, excellent, fair, poor, degraded }
 
-/// What the UI should render for media-heavy content at the current tier.
+
 enum MediaQuality { full, reduced, placeholder }
 
 /// The step the diagnostic tool is currently executing.
 enum DiagnosticPhase { idle, idlePing, download, upload, analyzing }
 
-/// ---------------------------------------------------------------------------
-/// Tunables
-/// ---------------------------------------------------------------------------
-
 class DiagnosticConfig {
-  /// Zero-byte endpoint — the response is empty, so the round trip is a clean
-  /// latency sample. (ICMP ping isn't available to Dart without platform code,
-  /// so this is an HTTP round-trip time, which is what matters for the app.)
   static const String pingUrl = 'https://speed.cloudflare.com/__down?bytes=0';
 
   /// Returns a payload of exactly `bytes` incompressible bytes.

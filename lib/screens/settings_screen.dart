@@ -4,6 +4,7 @@ import '../models/app_state.dart';
 import '../theme/app_theme.dart';
 import '../widgets/section_header.dart';
 import '../widgets/bottom_nav.dart';
+import '../widgets/responsive_page.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -15,7 +16,7 @@ class SettingsScreen extends StatelessWidget {
     final appState = context.watch<AppState>();
 
     return Scaffold(
-      body: SafeArea(
+      body: ResponsivePage(child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppSpacing.md),
           child: Column(
@@ -138,7 +139,7 @@ class SettingsScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      )),
       bottomNavigationBar: const AppBottomNav(currentIndex: 1),
     );
   }

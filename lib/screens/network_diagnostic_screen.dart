@@ -6,6 +6,7 @@ import '../theme/app_theme.dart';
 import '../widgets/adaptive_media.dart';
 import '../widgets/connection_health_banner.dart';
 import '../widgets/metric_tile.dart';
+import '../widgets/responsive_page.dart';
 
 /// Activity 4 — the diagnostic dashboard.
 ///
@@ -36,10 +37,16 @@ class NetworkDiagnosticScreen extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: SafeArea(
+      body: ResponsivePage(child: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final columns = constraints.maxWidth > 600 ? 4 : 2;
+            final columns = constraints.maxWidth >= 960
+                ? 4
+                : constraints.maxWidth >= 700
+                    ? 3
+                    : constraints.maxWidth < 380
+                        ? 1
+                        : 2;
 
             return SingleChildScrollView(
               padding: const EdgeInsets.all(AppSpacing.md),
@@ -124,7 +131,7 @@ class NetworkDiagnosticScreen extends StatelessWidget {
             );
           },
         ),
-      ),
+      )),
     );
   }
 }
@@ -304,7 +311,7 @@ class _MetricsGrid extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       crossAxisSpacing: AppSpacing.sm,
       mainAxisSpacing: AppSpacing.sm,
-      childAspectRatio: 1.35,
+      childAspectRatio: columns == 1 ? 2.4 : columns == 2 ? 1.15 : 1.25,
       children: tiles,
     );
   }

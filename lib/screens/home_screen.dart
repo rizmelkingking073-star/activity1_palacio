@@ -4,6 +4,7 @@ import '../widgets/activity_card.dart';
 import '../widgets/connection_health_banner.dart';
 import '../widgets/section_header.dart';
 import '../widgets/bottom_nav.dart';
+import '../mesh_chat/mesh_chat_screen.dart';
 import 'activity_one_screen.dart';
 import 'activity_two_screen.dart';
 import 'network_monitor_screen.dart';
@@ -101,6 +102,16 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  ActivityCard(
+                    activityLabel: 'ACTIVITY 5',
+                    title: 'Local Mesh Chat',
+                    description:
+                        'Offline peer-to-peer messaging with nearby devices, no internet needed',
+                    icon: Icons.hub_rounded,
+                    onOpen: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const MeshChatScreen()),
+                    ),
+                  ),
 
                   const SizedBox(height: AppSpacing.sm),
 
@@ -125,7 +136,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: AppSpacing.xs),
                           Text(
-                            '4 Activities Available',
+                            '5 Activities Available',
                             style: theme.textTheme.bodyMedium?.copyWith(
                               color: AppColors.secondaryGreen,
                               fontWeight: FontWeight.w600,

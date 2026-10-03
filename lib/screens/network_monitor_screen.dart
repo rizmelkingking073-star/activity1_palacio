@@ -4,6 +4,7 @@ import '../models/network_minitor_state.dart';
 import '../theme/app_theme.dart';
 import '../widgets/network_status_banner.dart';
 import '../widgets/queued_request_card.dart';
+import '../widgets/responsive_page.dart';
 
 class NetworkMonitorScreen extends StatelessWidget {
   const NetworkMonitorScreen({super.key});
@@ -29,7 +30,7 @@ class NetworkMonitorScreen extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: SafeArea(
+      body: ResponsivePage(child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppSpacing.md),
           child: Column(
@@ -148,7 +149,7 @@ class NetworkMonitorScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }

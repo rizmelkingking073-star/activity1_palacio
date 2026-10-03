@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
-import '../widgets/sensor_card.dart';
+import '../widgets/responsive_page.dart';
 
 class ActivityTwoScreen extends StatelessWidget {
   const ActivityTwoScreen({super.key});
@@ -18,12 +18,9 @@ class ActivityTwoScreen extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: SafeArea(
+      body: ResponsivePage(child: SafeArea(
         child: LayoutBuilder(
-          builder: (context, constraints) {
-            final isWide = constraints.maxWidth > 600;
-            final crossAxisCount = isWide ? 3 : 2;
-
+          builder: (context, _) {
             return SingleChildScrollView(
               padding: const EdgeInsets.all(AppSpacing.md),
               child: Column(
@@ -72,15 +69,7 @@ class ActivityTwoScreen extends StatelessWidget {
             );
           },
         ),
-      ),
+      )),
     );
   }
-}
-
-class _SensorData {
-  final String name;
-  final String exampleValue;
-  final IconData icon;
-
-  const _SensorData(this.name, this.exampleValue, this.icon);
 }

@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.compile.JavaCompile
+
 allprojects {
     repositories {
         google()
@@ -17,6 +19,17 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(":app")
+}
+
+// nearby_connections 4.3.0 still compiles as Java 8 and enables deprecated
+// API diagnostics for Google Nearby APIs. Keep those upstream-only warnings
+// from polluting this app's build output without muting diagnostics elsewhere.
+subprojects {
+    if (name == "nearby_connections") {
+        tasks.withType<JavaCompile>().configureEach {
+            options.compilerArgs.addAll(listOf("-Xlint:-options", "-Xlint:-deprecation"))
+        }
+    }
 }
 
 tasks.register<Delete>("clean") {

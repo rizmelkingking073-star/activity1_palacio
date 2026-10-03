@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import '../widgets/responsive_page.dart';
 
 class ActivityOneScreen extends StatefulWidget {
   const ActivityOneScreen({super.key});
@@ -28,7 +29,7 @@ class _ActivityOneScreenState extends State<ActivityOneScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: SafeArea(
+      body: ResponsivePage(child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppSpacing.md),
           child: Column(
@@ -167,7 +168,7 @@ class _ActivityOneScreenState extends State<ActivityOneScreen> {
             ],
           ),
         ),
-      ),
+      )),
     );
   }
 }
